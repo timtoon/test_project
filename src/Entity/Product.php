@@ -145,4 +145,11 @@ class Product
     {
         return $this->deletedAt;
     }
+
+    public function setDeletedAt(): self
+    {
+        $this->deletedAt = new \DateTime();
+
+        return $this;
+    }
 }

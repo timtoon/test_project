@@ -187,9 +187,6 @@ class ProductController extends AbstractController
         $product->setStatus(EnumStatusType::DELETED);
         $product->setDeletedAt(new \DateTime());
 
-//        $entityManager->remove($guest);
-//        $entityManager->flush();
-
         try {
 	        $em->persist($product);
 	        $em->flush();

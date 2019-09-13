@@ -64,7 +64,7 @@ class CustomerController extends AbstractController
         $customer->setUuid($uuid);
         $customer->setFirstName($data['first_name']);
         $customer->setLastName($data['last_name']);
-        $customer->setDateOfBirth($data['date_of_birth']);
+        $customer->setDateOfBirth(new \DateTime($data['date_of_birth']));
 
         $errors = $validator->validate($customer);
 
@@ -89,7 +89,7 @@ class CustomerController extends AbstractController
 
 		$logger->info('Adding Customer...');
 
-        return $this->json(['message' => 'Customer {$uuid} created']);
+        return $this->json(['message' => "Customer {$uuid} created"]);
     }
 
     /**
@@ -125,15 +125,15 @@ class CustomerController extends AbstractController
         $customer = $em->getRepository('App\Entity\Customer')->findOneByUuid($uuid);
 
         if($request->query->has('first_name')) {
-	        $customer->setName($request->query->get('first_name'));
+	        $customer->setFirstName($request->query->get('first_name'));
         }
 
         if($request->query->has('last_name')) {
-	        $customer->setName($request->query->get('last_name'));
+	        $customer->setLastName($request->query->get('last_name'));
         }
 
         if($request->query->has('date_of_birth')) {
-	        $customer->setName($request->query->get('date_of_birth'));
+	        $customer->setDateOfBirth(new \DateTime($request->query->get('date_of_birth')));
         }
 
         if($request->query->has('status')) {

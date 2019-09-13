@@ -25,7 +25,7 @@ class Customer
 
     /**
      * @ORM\Column(type="string", length=16)
-     * @Assert\Uuid
+     * @Assert\NotBlank
      */
     private $uuid;
 
@@ -206,5 +206,12 @@ class Customer
     public function getDeletedAt(): ?\DateTimeInterface
     {
         return $this->deletedAt;
+    }
+
+    public function setDeletedAt(): self
+    {
+        $this->deletedAt = new \DateTime();
+
+        return $this;
     }
 }
