@@ -17,6 +17,11 @@ class User implements UserInterface
      */
     private $id;
 
+     /**
+      * @ORM\Column(type="string", unique=true)
+      */
+     private $apiToken;
+
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */

@@ -36,7 +36,7 @@ class ProductController extends AbstractController
 
     /**
      * @Route("/product", name="product_create", methods={"POST"})
-     * #@IsGranted("ROLE_USER")
+     * @IsGranted("ROLE_USER")
      */
     public function create(Request $request, EntityManagerInterface $em, ValidatorInterface $validator, LoggerInterface $logger)
     {
