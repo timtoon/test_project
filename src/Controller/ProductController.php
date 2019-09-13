@@ -23,7 +23,6 @@ class ProductController extends AbstractController
 {
     /**
      * @Route("/product", name="product_index", methods={"GET"})
-     * @IsGranted("ROLE_USER")
      */
     public function index(Request $request, LoggerInterface $logger)
     {
@@ -131,7 +130,11 @@ class ProductController extends AbstractController
         }
 
         if($request->query->has('status')) {
-	        $product->setStatus($request->query->get('status'));
+        	if(in_array($request->query->get('status'), EnumStatusType::getAvailableTypes())) {
+		        $product->setStatus($request->query->get('status'));
+        	} else {
+		        return $this->json(['error' => 'Invalid status type']);
+        	}
         }
 
         if($request->query->has('customer_uuid')) {

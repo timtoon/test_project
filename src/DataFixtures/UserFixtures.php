@@ -25,6 +25,7 @@ class UserFixtures extends Fixture
             $user,
             'password'
         ));
+        $user->setApiToken('auth');
 
         $manager->persist($user);
         $manager->flush();

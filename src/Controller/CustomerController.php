@@ -24,7 +24,6 @@ class CustomerController extends AbstractController
 {
     /**
      * @Route("/customer", name="customer_index", methods={"GET"})
-     * @IsGranted("ROLE_USER")
      */
     public function index(Request $request, LoggerInterface $logger)
     {
@@ -138,7 +137,11 @@ class CustomerController extends AbstractController
         }
 
         if($request->query->has('status')) {
-	        $customer->setStatus($request->query->get('status'));
+        	if(in_array($request->query->get('status'), EnumStatusType::getAvailableTypes())) {
+		        $customer->setStatus($request->query->get('status'));
+        	} else {
+		        return $this->json(['error' => 'Invalid status type']);
+        	}
         }
 
         $errors = $validator->validate($customer);

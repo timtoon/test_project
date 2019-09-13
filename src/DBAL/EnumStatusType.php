@@ -52,4 +52,9 @@ class EnumStatusType extends Type
     {
         return true;
     }
+
+    public static function getAvailableTypes()
+    {
+        return self::$values;
+    }
 }

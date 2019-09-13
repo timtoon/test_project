@@ -115,4 +115,20 @@ class User implements UserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+
+    /**
+     * @see UserInterface
+     */
+    public function getApiToken(): string
+    {
+        return (string) $this->password;
+    }
+
+    public function setApiToken(string $apiToken): self
+    {
+        $this->apiToken = $apiToken;
+
+        return $this;
+    }
+
 }
